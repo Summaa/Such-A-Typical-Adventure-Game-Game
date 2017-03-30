@@ -1,4 +1,4 @@
-from GameCharacters import Player, Boss
+
 
 class Scene(object):
 
@@ -7,7 +7,8 @@ class Scene(object):
         """This sets what will happen when the scene is called and will be
            inherited and changed by all child Scenes.
         """
-        pass
+        print "This scene is not yet configured."
+        exit(1)
 
 
 class Death(Scene):
@@ -19,7 +20,26 @@ class Death(Scene):
 class ThroneRoom(Scene):
 
     def enter(self):
-        pass
+        print "BAM! With a flash of light you suddenly find yourself inside the"
+        print "body of an average built man with an average face."
+        print "You very quickly realise that you have been brought into a very"
+        print "typical adventure scenario. Of course with any typical adventure"
+        print "story you have to get a quest and where better to get a quest"
+        print "than the throne room you happen to be in. It now dawns on you"
+        print "that this whole time an old man has been blabing at you and"
+        print "you've been too busy with how typical this scenario is to"
+        print "notice. As the old man comes into focus you see a crown on top"
+        print "of his head. \"Of course! How typical, get a quest from a king.\""
+        print "You think to yourself. You finally start to pay attention to"
+        print "what the king is saying and hear \"So there you have it my dear"
+        print "adventurer, I lost my crown in the Dungeon of Doom and I'm too"
+        print "old and frail to get it. Will you help me?\" Now since this is"
+        print "a typical adventure game (game) you have absolutely no choice"
+        print "but to say yes. With that the king gives a jolly old laugh and"
+        print "motions for the guard to usher you out and lead you to the"
+        print "entrance of the Dungeon of Doom."
+
+        return 'dungeon_entrance'
 
 
 class DungeonEntrance(Scene):
@@ -28,7 +48,7 @@ class DungeonEntrance(Scene):
         pass
 
 
-class DungeonRoom1(Scene):
+class GoblinRoom1(Scene):
 
     def enter(self):
         pass
@@ -40,25 +60,25 @@ class ItemRoom1(Scene):
         pass
 
 
-class DungeonRoom2(Scene):
+class WizardRoom(Scene):
 
     def enter(self):
         pass
 
 
-class DungeonRoom3(Scene):
+class RatRoom(Scene):
 
     def enter(self):
         pass
 
 
-class DungeonRoom4(Scene):
+class SlimeRoom(Scene):
 
     def enter(self):
         pass
 
 
-class DungeonRoom5(Scene):
+class GoblinRoom2(Scene):
 
     def enter(self):
         pass
@@ -85,7 +105,7 @@ class TreasureRoom(Scene):
 class Map(object):
 
     scenes = {
-
+        'throne_room': ThroneRoom()
     }
 
     def __init__(self, start_scene):
