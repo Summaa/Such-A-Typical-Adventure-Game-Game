@@ -1,6 +1,7 @@
 from GameScenes import ThroneRoom, DungeonEntrance, GoblinRoom1, ItemRoom1
-from GameScenes import WizardRoom, RatRoom, SlimeRoom,GoblinRoom2
-from GameScenes import ItemRoom2, BossRoom, TreasureRoom, Map, Scene
+from GameScenes import WizardRoom, WizardRoomCombat, ReturnedGoblinRoom1
+from GameScenes import RatRoom, SlimeRoom, GoblinRoom2, ItemRoom2, BossRoom
+from GameScenes import TreasureRoom, Map, Scene
 
 class Engine(object):
 

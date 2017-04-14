@@ -1,0 +1,22 @@
+*Map
+ - next_scene
+ - opening_scene
+*Engine
+ - play
+*Scene
+ -enter
+ *Death
+ *Throne Room
+ *Dungeon Entrance
+ *Dugeon Room 1
+ *Item Room 1
+ *Dugeon Room 2
+ *Dugeon Room 3
+ *Dugeon Room 4
+ *Dugeon Room 5
+ *Item Room 2
+ *Boss Room
+ *Treasure Room
+*Player
+*Monster
+ *Boss
