@@ -14,21 +14,9 @@ class Player(object):
 
     def potions(self):
 
-        """Used every battle that healing is possible in so you don't have to
-           type out the code every time.
-        """
-
         potions = self
         potions = 0
         return potions
-
-        if potions >= 1 and action.lower() == "use potion":
-            print "You drink all of the red liquid from the bottle and heal for"
-            print "15 health."
-            player_health += 15
-
-            if player_health > 50:
-                player_health = 50
 
 
 class Monster(object):
@@ -81,13 +69,13 @@ class Slime(Monster):
 
     def attack(Self):
         attack_amount = randint(2,5)
-        return attack
+        return attack_amount
 
 
 class Boss(Monster):
 
     def health(self):
-        health_amount = 20
+        health_amount = 30
         return health_amount
 
     def attack(self):

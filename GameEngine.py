@@ -13,7 +13,7 @@ class Engine(object):
         """Used to run the games Scenes."""
 
         current_scene = self.scene_map.opening_scene()
-        last_scene = self.scene_map.next_scene('treasure_room')
+        last_scene = self.scene_map.next_scene('end')
 
         while current_scene != last_scene:
             next_scene_name = current_scene.enter()

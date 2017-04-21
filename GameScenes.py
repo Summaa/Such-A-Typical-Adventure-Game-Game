@@ -33,9 +33,8 @@ class Death(Scene):
 class ThroneRoom(Scene):
 
     def enter(self):
-        print "Room name."
-        room_name = raw_input("> ")
-        return '%s' % room_name
+        global player_health
+        player_health = Player().health()
 
         print "BAM! With a flash of light you suddenly find yourself inside the"
         print "body of an average built man with an average face."
@@ -206,12 +205,16 @@ class GoblinRoom1(Scene):
                 print "You lunge forward giving a satisfying stab for %s damage." % player_attack
                 goblin_health = goblin_health - player_attack
                 print "The goblin now has %s health." % goblin_health
+
+                raw_input("Press enter to continue > ")
                 player_action = True
 
             if player_action == True and player_health > 0 and goblin_health > 0:
                 print "The goblin retaliates with a quick slash of his own for %s damage." % goblin_attack
                 player_health = player_health - goblin_attack
                 print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
                 player_action = False
 
             if player_health <= 0:
@@ -225,6 +228,8 @@ class GoblinRoom1(Scene):
                 print "you head knocking you out."
                 print "You are soon brought to the goblins home and cooked for"
                 print "its family to eat and never wake up again."
+
+                raw_input("Press enter to continue > ")
 
                 return 'death'
 
@@ -293,6 +298,9 @@ class ItemRoom1(Scene):
         print "You look around a bit more and soon find out that the only thing"
         print "in this room was the healing potion and decide to move on."
         print "From this room you can only go forward and so forward you go."
+
+        raw_input("Press enter to continue > ")
+
         return 'slime_room'
 
 
@@ -413,7 +421,9 @@ class WizardRoom(Scene):
                         print "world of the horrid dungeon.\" With that he"
                         print "beckons you to the portal. You give him a quick"
                         print "thanks and goodbye and proceed to go through the"
-                        print "portal."
+                        print "portal. On the other side you find yourself on a"
+                        print "pathway. You go forward in the direction opposite"
+                        print "the portal."
 
                         raw_input("Press enter to continue > ")
 
@@ -470,12 +480,16 @@ class WizardRoomCombat(Scene):
                 print "You move fast going for a hard slash for %s damage." % player_attack
                 wizard_health = wizard_health - player_attack
                 print "Merlin now has %s health." % wizard_health
+
+                raw_input("Press enter to continue > ")
                 player_action = True
 
             if player_action == True and player_health > 0 and wizard_health > 0:
                 print "Merlin retaliates with a magic missle for %s damage." % wizard_attack
                 player_health = player_health - wizard_attack
                 print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
                 player_action = False
 
             if player_health <= 0:
@@ -488,6 +502,8 @@ class WizardRoomCombat(Scene):
                 print "With a quick wave of his hand the sword proceeds to come"
                 print "at you, stabbing you through the heart and ending your"
                 print "life."
+
+                raw_input("Press enter to continue > ")
 
                 return 'death'
 
@@ -592,12 +608,16 @@ class RatRoom(Scene):
                 print "You lunge forward giving a satisfying stab for %s damage." % player_attack
                 rat_health = rat_health - player_attack
                 print "The rat now has %s health." % rat_health
+
+                raw_input("Press enter to continue > ")
                 player_action = True
 
             if player_action == True and player_health > 0 and rat_health > 0:
                 print "The rat lets out a harsh sound and bites you for %s damage." % rat_attack
                 player_health = player_health - rat_attack
                 print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
                 player_action = False
 
             if player_health <= 0:
@@ -607,6 +627,8 @@ class RatRoom(Scene):
                 print "on your body and begins to eat you alive. You spend the"
                 print "next and last hour of your life in agony as the rat eats"
                 print "you."
+
+                raw_input("Press enter to continue > ")
 
                 return 'death'
 
@@ -629,31 +651,429 @@ class SlimeRoom(Scene):
 
     def enter(self):
         # Add potions from here on (Skip goblin room 2).
-        pass
+        print "You soon begin to see the outline of the next chamber approach."
+        print "The same moment you spot the next chamber the ground begins to"
+        print "rumble. You stand steady and look around, readying yourself for"
+        print "a fight. Instead of a monster to fight you are greeted by a"
+        print "giant stone wall falling to the ground inches away from you."
+        print "Taking a deep breath and looking at your toes to make sure they"
+        print "weren't crushed you say to yourself \"Well no going back now.\""
+        print "You turn around and continue towards the next chamber where you"
+        print "can hear a faint squishing sound in the distance. After a few"
+        print "steps you can see the source of the sounds in the well lit room."
+        print "It looks as though there is a slime in this chamber and that it"
+        print "will be your next opponent. Surprised by the lack of stealth by"
+        print "this monster you stare for a moment. The slime, blue in color,"
+        print "and barely 3 feet tall, moves in a way that suggests it has"
+        print "become aware of your presence and has turned to you. Before your"
+        print "eyes the slime turns into the shape of a human. While still"
+        print "short in stature the slime looks like it will put up a decent"
+        print "fight, since it seems made only for combat. Snapping out of your"
+        print "daze you ready your sword and charge in at the slime."
+
+        raw_input("Press enter to continue > ")
+
+        slime_health = Slime().health()
+        global player_health
+        global potions
+
+        while slime_health > 0:
+            player_attack = Player().attack()
+            slime_attack = Slime().attack()
+
+            print "You currently have %s health." % player_health
+            print "The slime currently has %s health." % slime_health
+            print "You have %s potion(s) available to use." % potions
+            print "What is your action?"
+
+            action = raw_input("> ")
+            player_action = False
+
+            if potions >= 1 and "potion" in action.lower():
+                print "You drink all of the red liquid from the bottle and heal for"
+                print "15 health."
+                player_health += 15
+                potions -= 1
+                print "You have %s bottle(s) remaining." % potions
+
+                raw_input("Press enter to continue > ")
+
+                if player_health > 50:
+                    player_health = 50
+
+                player_action =  True
+
+            if action.lower() == "attack" and player_action == False:
+                print "You slash at the slime with all your might for %s damage." % player_attack
+                slime_health = slime_health - player_attack
+                print "The slime now has %s health." % slime_health
+
+                raw_input("Press enter to continue > ")
+                player_action = True
+
+            if player_action == True and player_health > 0 and slime_health > 0:
+                print "The slime, shaped like a human, forms a giant fist and slams it into you for %s damage." % slime_attack
+                player_health = player_health - slime_attack
+                print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
+                player_action = False
+
+            if player_health <= 0:
+                print "After the last hit you could not stand any longer and"
+                print "get flung back into the wall by the giant fist at full"
+                print "force. Paralyzed from the force of the hit you stay"
+                print "against the wall awaiting your death, knowing this is the"
+                print "end for you. As if on que the slime makes it way over to"
+                print "you and wraps around you. Completly encased inside the"
+                print "slime you are unable to breath and feel a burning"
+                print "sensation over your entire body. Within a few moments the"
+                print "lack of air and extreme pain make you pass out. You are"
+                print "soon dissolved as food for the slime, never to wake up"
+                print "again."
+
+                raw_input("Press enter to continue > ")
+
+                return 'death'
+
+            if slime_health <= 0:
+                print "After the last swing of your sword the slime splatters"
+                print "all over the chamber. Waiting a moment to make sure the"
+                print "pieces aren't going to reform again, you relax and take"
+                print "a breather. After a few moments you stand up ready to"
+                print "move on."
+                print "This chamber changes the direction you go but still only"
+                print "gives you one way to go. So without hesitation you move"
+                print "forward."
+
+                raw_input("Press enter to continue > ")
+
+                return 'item_room_2'
+
 
 
 class GoblinRoom2(Scene):
 
     def enter(self):
-        pass
+        print "After about 5 minutes of walking you enter the next chamber."
+        print "In this chamber you see a clear shot onwards going to your left"
+        print "and what looks like a small version of someones front lawn."
+        print "This lawn looks exactly like a you'd imagine, minus the grass."
+        print "There is a wooden door which appears to have the stone walls"
+        print "carved out for someones house and a red picket fence surrounding"
+        print "a small yard of dirt. By the size of everything you estimate"
+        print "That this is made for someone or something no taller than 4 feet."
+        print "This makes you think back and realise that this must be the"
+        print "goblin's house. Remembering that it said it had a family you"
+        print "try and hurry your way out of the chamber."
+
+        raw_input("Press enter to continue > ")
+
+        print "However before you can even start on your way out you are"
+        print "interrupted by a screechy female voice. \"Sheldar dear, is that"
+        print "you?\" This is shortly followed by the door to the goblin house"
+        print "opening and a goblin smaller than before coming out. Upon seeing"
+        print "you the goblin freezes in place and stares. You both stand in a"
+        print "akward pause staring until she breaks the silence by saying"
+        print "\"So you must be the huuu-man my husband went out to kill for"
+        print "out dinner. If you are here then that must mean you killed him.\""
+        print "The goblin pauses for a moment and you think you hear a small"
+        print "sniffel come from her. \"Very well then, I must avenge him and"
+        print "make you dinner. READY YOURSELF HUUU-MAN!\" She yells while"
+        print "charging at you. You ready yourself wishing you could of got away"
+        print "without a fight."
+
+        raw_input("Press enter to continue > ")
+
+        goblin_health = Goblin().health()
+        global player_health
+
+        while goblin_health > 0:
+            player_attack = Player().attack()
+            goblin_attack = Goblin().attack()
+
+            print "You currently have %s health." % player_health
+            print "The goblin currently has %s health." % goblin_health
+            print "What is your action?"
+
+            action = raw_input("> ")
+            player_action = False
+
+            if action.lower() == "attack" and player_action == False:
+                print "You strike quickly to keep pace with her speed for %s damage." % player_attack
+                goblin_health = goblin_health - player_attack
+                print "The goblin now has %s health." % goblin_health
+
+                raw_input("Press enter to continue > ")
+                player_action = True
+
+            if player_action == True and player_health > 0 and goblin_health > 0:
+                print "The goblin gives a warcry and does a lightning fast stab for %s damage." % goblin_attack
+                player_health = player_health - goblin_attack
+                print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
+                player_action = False
+
+            if player_health <= 0:
+                print "After the last stab you fall, mortally wounded."
+                print "The goblin wastes no time finishing you off with a"
+                print "throat slash. With a smile the goblin drags you to her"
+                print "house and cooks you for her family's dinner."
+
+                raw_input("Press enter to continue > ")
+
+                return 'death'
+
+            if goblin_health <= 0:
+                print "After the last attack the goblin falls and lets out a"
+                print "shout saying \"NOOO, I'M SORRY MY HUSBAND!\" The moment"
+                print "she finishes her sentence she lets out a sigh of her"
+                print "last breath and dies. Feeling bad about leaving goblin"
+                print "children without parents, you quickly leave the chamber"
+                print "to move on."
+
+                raw_input("Press enter to continue > ")
+
+                return 'item_room_2'
 
 
 class ItemRoom2(Scene):
 
     def enter(self):
-        pass
+        global potions
+        global player_health
+
+        print "Following your path you soon come up to a merger in your path."
+        print "Looking behind yourself you see another path that leads back the"
+        print "way you came but it goes in the opposite direction. You figure"
+        print "that this must be a path to the other part of the dungeon you"
+        print "didn't go to. You guess that you must be nearing the end of the"
+        print "dungeon if the paths are merging. After contemplating that"
+        print "thought for a moment, you turn around and continue forward to"
+        print "what you hope is the end of your quest."
+
+        raw_input("Press enter to continue > ")
+
+        print "After another short while you enter an elaborate room made of"
+        print "marble. This place strikes you as an ancient temple to the old"
+        print "gods. It has high rising marble pillars supporting the roof and"
+        print "silk banners hanging from the wall with words in a foreign"
+        print "language written on them. In the center of the enourmous room"
+        print "is a pool of water with a statue of what must be the god of this"
+        print "temple. Underneath the statue is a chest that appears to not be"
+        print "locked. Finally in the opposite side of the room is a giant red"
+        print "door with a big iron skull mounted in the middle as part of the"
+        print "door. Written from top to bottom in mutiple languages are the"
+        print "words forbidden on the door. You believe that behind that door"
+        print "must be your final opponent."
+
+        raw_input("Press enter to continue > ")
+
+        print "You decide that you will check out the chest in the pool first."
+        print "Once you are at the chest you waste no time opening it as it is"
+        print "left completly unlocked. Inside you find a bottle of red liquid"
+        print "which you know as a healing potion. This means you now have"
+        potions += 1
+        print "%s healing potion(s)." % potions
+
+        raw_input("Press enter to continue > ")
+
+        print "With the only thing of importance in the room looked at you have"
+        print "a choice of using a potion to heal or moving on to your final"
+        print "fight. What do you do?"
+
+        while True:
+            action = raw_input("> ")
+            healed = False
+
+            if "potion" in action.lower():
+                print "You drink all of the red liquid from the bottle and heal for"
+                print "15 health."
+                player_health += 15
+                potions -= 1
+                print "You have %s bottle(s) remaining." % potions
+
+                raw_input("Press enter to continue > ")
+
+                if player_health > 50:
+                    player_health = 50
+
+                print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
+
+                healed = True
+
+            else:
+                print "That is not a valid action hero."
+
+            if healed == True or "move on" in action.lower():
+                print "You make your way over to the towering door. With your"
+                print "hands shaking you place them on the door. You take a"
+                print "deep breath to calm your nerves and push as hard as you"
+                print "can on the door. The door screechs open at a turtle like"
+                print "pace."
+
+                raw_input("Press enter to continue > ")
+
+                return 'boss_room'
 
 
 class BossRoom(Scene):
 
     def enter(self):
-        pass
+        print "Before you is a room as big as the one before you"
+        print "however, sitting right in the middle is a giant three headed dog."
+        print "The dog is staring at you with the left and right head sneering"
+        print "at you. You take a few steps forward and raise your sword as the"
+        print "door behind you swings shut. To your surprise the middle head of"
+        print "the dog starts to speak to you in a booming voice. \"Welcome"
+        print "human! I have not seen one of your kind in quite some time.\""
+        print "All three heads shake and the dog continues. \"Well I assume you"
+        print "came here to challenge me. Allow me to introduce myself. I am the"
+        print "legendary three headed dog, CERBERUS! Be warned human that to"
+        print "beat me you must have extraordinary strength. Ready yourself!\""
+        print "With that all of Cerberus' heads start to growl and you find"
+        print "yourself thrust into combat."
+
+        raw_input("Press enter to continue > ")
+
+        boss_health = Boss().health()
+        global player_health
+        global potions
+
+        while boss_health > 0:
+            player_attack = Player().attack()
+            boss_attack = Boss().attack()
+
+            print "You currently have %s health." % player_health
+            print "Cerberus currently has %s health." % boss_health
+            print "You have %s potion(s) available to use." % potions
+            print "What is your action?"
+
+            action = raw_input("> ")
+            player_action = False
+
+            if potions >= 1 and "potion" in action.lower():
+                print "You drink all of the red liquid from the bottle and heal for"
+                print "15 health."
+                player_health += 15
+                potions -= 1
+                print "You have %s bottle(s) remaining." % potions
+
+                raw_input("Press enter to continue > ")
+
+                if player_health > 50:
+                    player_health = 50
+
+                player_action =  True
+
+            if action.lower() == "attack" and player_action == False:
+                print "You charge at the dog and jump up to stab one of the heads for %s damage." % player_attack
+                boss_health = boss_health - player_attack
+                print "Cerberus now has %s health." % boss_health
+
+                raw_input("Press enter to continue > ")
+                player_action = True
+
+            if player_action == True and player_health > 0 and boss_health > 0:
+                print "One of Cerberus' heads rush forward and bite you for %s damage." % boss_attack
+                player_health = player_health - boss_attack
+                print "You now have %s health." % player_health
+
+                raw_input("Press enter to continue > ")
+                player_action = False
+
+            if player_health <= 0:
+                print "You fall to the ground exausted. All three of Cerberus'"
+                print "heads look at you and the middle one begins to speak"
+                print "again. \"You were a worty adversary human. Unfortunatly"
+                print "for you, you were still not strong enough.\" After"
+                print "saying that the left head charges at you and eats you"
+                print "whole. You spend the last moments of your life in agony"
+                print "as you are slowly digested."
+
+                raw_input("Press enter to continue > ")
+
+                return 'death'
+
+            if boss_health <= 0:
+                print "Cerberus lets out a howl after your last stab. Still not"
+                print "fallen, you prepare to strike again but the dog begins to"
+                print "speak to you again stopping you. \"You have proven your"
+                print "\"worth human! For that I will leave this land and return"
+                print "from where I came. That of course means you can have all"
+                print "of the captured treasue in the chamber behind me."
+                print "Farwell human, and may you find your future travels as"
+                print "successful as this one.\" With that Cerberus vanishes in"
+                print "a plume black smoke leaving you in the giant chamber by"
+                print "yourself. Exausted and delighted that you have made it"
+                print "through this hell, you hobble your way to the golden"
+                print "encrusted door that was behind cerberus."
+
+                raw_input("Press enter to continue > ")
+
+                return 'treasure_room'
 
 
 class TreasureRoom(Scene):
 
     def enter(self):
-        pass
+        print "Wasting no time you push the door open with your remining"
+        print "stregth and make your way into the chamber. Within you find piles"
+        print "of gold, jewels, jewelry, and other treause as far as the eye can"
+        print "see. In the center of the chamber sitting on a pedestal you see"
+        print "what you came for, the kings crown. Made of gold and lined with"
+        print "the rarest gems on the planet infused with magic, you marvel at"
+        print "the crown for a moment. You then grab the crown and make your way"
+        print "back out of the dungeon without incident. It seems any monsters"
+        print "left have all cleared out of the dungeon meaning this place will"
+        print "no longer be a blight on the land."
+
+        raw_input("Press enter to continue > ")
+
+        print "After a long travel back to the kings castle you find yourself in"
+        print "front of the entrance gate. As you walked through the town"
+        print "outside the castle you saw villagers staring at you in awe. This"
+        print "gave you the feeling that no one expected you back. You are soon"
+        print "approached by the guards of the gate. \"HERO? Is that YOU? IT IS!"
+        print "PLEASE COME WITH US!\" Just like that you are escorted back to"
+        print "the trone room in front of the king. As you greet the king you"
+        print "are surronded by servents offering you food and drink and you"
+        print "notice all of the guards are kneeling at your feet. The king"
+        print "stand up from his throne and walks down the steps at the base to"
+        print "meet you face to face. He smiles, takes the crown from you and"
+        print "says. \"Well I'll be damned! YOU DID IT!\" He laughs with joy and"
+        print "continues. \"We will have a feast to honor you tonight hero! All"
+        print "the lands will hear of your deeds conquering the dungeon of doom!"
+        print "From here on you are an honoured guest at all of my holdings.\""
+        print "AS the king said you find yourself feasting for the night and are"
+        print "offered the position to be captain of the guards. You take the"
+        print "offer and find yourself in service of the king. Every where you"
+        print "go in your travels you are honoured as a great hero of your time"
+        print "and you live a happy life."
+
+        raw_input("Press enter to continue > ")
+
+        print "Thank you for playing \"Such a Typical Adventure Game Game!\""
+        print "This is one of my first real cracks at a game and I hope you"
+        print "enjoyed! There are three possible paths to the boss room so be"
+        print "sure to try them all out! Good luck! - Summa"
+
+        answer = raw_input("Would you like to play again? Y/N ")
+
+        if answer.lower() == "y":
+            return "throne_room"
+
+        else:
+            return 'end'
+
+
+class End(Scene):
+
+    def enter(self):
+        exit(1)
 
 
 class Map(object):
@@ -672,7 +1092,8 @@ class Map(object):
         'goblin_room_2': GoblinRoom2(),
         'item_room_2': ItemRoom2(),
         'boss_room': BossRoom(),
-        'treasure_room': TreasureRoom()
+        'treasure_room': TreasureRoom(),
+        'end': End()
     }
 
     def __init__(self, start_scene):
